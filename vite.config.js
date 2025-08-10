@@ -5,7 +5,7 @@ import fs from 'fs';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/js/app.js'],
+            input: ['resources/js/app.js', 'resources/css/app.css'],
             refresh: true,
         }),
     ],
@@ -18,12 +18,8 @@ export default defineConfig({
             interval: 100, // Intervalo de sondeo en milisegundos
             ignored: ['!**/dist/'],
         },
-        https: {
-            key: fs.readFileSync('/vagrant/ssl/30days.isw811.xyz/privkey.pem'),
-            cert: fs.readFileSync('/vagrant/ssl/30days.isw811.xyz/fullchain.pem'),
-        },
         hmr: {
-            protocol: 'wss',
+            protocol: 'ws',
             host: '30days.isw811.xyz',
             port: 5173,
         },

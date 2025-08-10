@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,9 +21,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::preventLazyLoading();
 
-        // Gate comentado - se usa Policy en su lugar
-        // Gate::define('edit-job', function (User $user, Job $job) {
-        //     return $job->employer->user->is($user);
-        // });
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
